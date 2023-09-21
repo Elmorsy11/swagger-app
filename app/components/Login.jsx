@@ -28,7 +28,8 @@ const Login = ({ setIsAuth, isAuth }) => {
 
         if (usersData?.username === username && usersData?.password === password) {
             setIsAuth(true)
-            localStorage.setItem('Auth', isAuth);
+
+            // localStorage.setItem('Auth', isAuth);
 
             toast.success('You Are logged in successfully')
         } else {

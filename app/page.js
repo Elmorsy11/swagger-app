@@ -12,11 +12,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import NavBar from './components/NavBar';
 
 const page = () => {
-  const [isAuth, setIsAuth] = useState(localStorage.getItem('Auth') === 'true')
+  const [isAuth, setIsAuth] = useState(typeof window !== "undefined" && localStorage?.getItem('Auth') === 'true')
 
   useEffect(() => {
-
-    localStorage.setItem('Auth', isAuth)
+    if (typeof window !== "undefined") {
+      localStorage?.setItem('Auth', isAuth)
+    }
   }, [isAuth])
 
   return (
