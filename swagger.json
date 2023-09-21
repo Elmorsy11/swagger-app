@@ -1,0 +1,2389 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "U-Drive",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "description": "Production Server",
+      "url": "https://udrive-api-hcr64pytia-uc.a.run.app"
+    },
+    {
+      "url": "http://localhost:8000",
+      "description": "Local server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "users"
+    },
+    {
+      "name": "vehicles"
+    },
+    {
+      "name": "bookings"
+    },
+    {
+      "name": "stations"
+    },
+    {
+      "name": "geofence"
+    },
+    {
+      "name": "dashboard"
+    },
+    {
+      "name": "landMarks"
+    },
+    {
+      "name": "reports"
+    },
+    {
+      "name": "checklists"
+    }
+  ],
+  "paths": {
+    "/api/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "signUp - send request to the admin to accept this profile",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "UserName": {
+                    "type": "string",
+                    "example": "user"
+                  },
+                  "Email": {
+                    "type": "string",
+                    "example": "test@gmail.com"
+                  },
+                  "Password": {
+                    "type": "integer",
+                    "example": "12345678"
+                  },
+                  "Image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Employee Number": {
+                    "type": "integer",
+                    "example": "+96601234567"
+                  },
+                  "Driver Licence": {
+                    "type": "integer",
+                    "example": "9601234567"
+                  },
+                  "Depatrment Name": {
+                    "type": "string",
+                    "example": "Dammam"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "updateUser",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "UserName": {
+                    "type": "string",
+                    "example": "userName"
+                  },
+                  "Email": {
+                    "type": "string",
+                    "example": "test911@gmail.com"
+                  },
+                  "Image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "FireBaseToken": {
+                    "type": "string",
+                    "example": "lfdkjinhoigjdfgnojgghfgidfj"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get profile",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "deleteUser",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "Email": "test@gmail.com",
+                  "Password": "12345678"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/forgetPassword": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "forget password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "test@gmail.com"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/verifyOtp": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "verifyOtp",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "test@gmail.com",
+                  "otp": "224530"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/otpPassword": {
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "otpPassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "test@gmail.com",
+                  "otp": "224530",
+                  "password": "987654"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/all": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get All Users",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/:id": {
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "delete user by id from the admin dashboard",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get user by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/allAdmins": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get All Admins",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/resetPassword": {
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "reset password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "newPassword": "123456",
+                  "oldPassword": "123456"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/createUser": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "create user",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "UserName": {
+                    "type": "string",
+                    "example": "test"
+                  },
+                  "Image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Email": {
+                    "type": "string",
+                    "example": "test@gmail.com"
+                  },
+                  "Role": {
+                    "type": "string",
+                    "example": "user"
+                  },
+                  "ParentAccount": {
+                    "type": "string",
+                    "example": "32121s2fs1f2s1f2sasaczxc21"
+                  },
+                  "Password": {
+                    "type": "string",
+                    "example": "test911"
+                  },
+                  "Fms_UserID": {
+                    "type": "string",
+                    "example": "32121s2fs1f2s1f2sasaczxc21"
+                  },
+                  "FireBaseToken": {
+                    "type": "string",
+                    "example": "32121s2fs1f2s1f2sasaczxc21"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/createAdmin": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "create admin",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "UserName": {
+                    "type": "string",
+                    "example": "admin2"
+                  },
+                  "Image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Email": {
+                    "type": "string",
+                    "example": "test@gmail.com"
+                  },
+                  "Password": {
+                    "type": "integer",
+                    "example": "12345678"
+                  },
+                  "Role": {
+                    "type": "string",
+                    "example": "admin"
+                  },
+                  "Fms_UserID": {
+                    "type": "string",
+                    "example": "32121s2fs1f2s1f2sasaczxc21"
+                  },
+                  "FireBaseToken": {
+                    "type": "string",
+                    "example": "32121s2fs1f2s1f2sasaczxc21"
+                  },
+                  "ParentAccount": {
+                    "type": "string",
+                    "example": "32121s2fs1f2s1f2sasaczxc21"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/fmsUsers": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get All fms Users",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/notify/:id": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "send notification to user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "title": "Test",
+                  "body": "test Notification"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/:userToUpdate": {
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "update user for admins dashboard",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "UserName": {
+                    "type": "string",
+                    "example": "srour"
+                  },
+                  "Email": {
+                    "type": "string",
+                    "example": "test@gmail.com"
+                  },
+                  "Password": {
+                    "type": "integer",
+                    "example": "123456111"
+                  },
+                  "Role": {
+                    "type": "string",
+                    "example": "user"
+                  },
+                  "ParentAccount": {
+                    "type": "string",
+                    "example": "32121s2fs1f2s1f2sasaczxc21"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles": {
+      "get": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "get all available Vehicles",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "add Vehicle",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "VehicleModel": "test4",
+                  "VehicleName": "test- 6815 DSA",
+                  "PlateNumber": "  Q3-212",
+                  "SerialNumber": "123465578912",
+                  "MakeYear": 2020,
+                  "Location": {
+                    "type": "Point",
+                    "coordinates": [
+                      26.398368053829206,
+                      49.977656852678734
+                    ]
+                  },
+                  "PricePerHour": 100,
+                  "Fms_VehicleId": "70707070",
+                  "Station": "32121s2fs1f2s1f2sasaczxc21",
+                  "Owner": "32121s2fs1f2s1f2sasaczxc21",
+                  "Geofence": "32121s2fs1f2s1f2sasaczxc21"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles/dashboard/vehicles": {
+      "get": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "get all Vehicles",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles/dashboard/settings": {
+      "get": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "get vehicle settings",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles/dashboard/fmsVhs": {
+      "get": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "get all Fms Vehicles",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles/dashboard/liveSteps": {
+      "get": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "get live steps",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "VehID",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "5452"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "2"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "100"
+          },
+          {
+            "name": "strDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-04-30T00:00:00"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-02T11:00:00"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles/dashboard/historyPlayback": {
+      "get": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "get history playback",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "VehID",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "5452"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "100"
+          },
+          {
+            "name": "strDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-04-30T00:00:00"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-02T11:00:00"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles/:vehicleId": {
+      "put": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "update vehicles",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "VehicleModel": "testttttttttt",
+                  "VehicleName": "tst- 6815 DSA",
+                  "PlateNumber": "  Q3-212",
+                  "SerialNumber": "12315457781223",
+                  "MakeYear": 2020,
+                  "Location": {
+                    "type": "Point",
+                    "coordinates": [
+                      26.398368053829206,
+                      49.977656852678734
+                    ]
+                  },
+                  "PricePerHour": 100,
+                  "Fms_VehicleId": "11592",
+                  "Station": "32121s2fs1f2s1f2sasaczxc21",
+                  "UserId": "32121s2fs1f2s1f2sasaczxc21",
+                  "Geofence": "32121s2fs1f2s1f2sasaczxc21"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "Delete Vehivle",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles/sendCommand": {
+      "post": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "sendCommand",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "data": {
+                    "serialnumber": "99898971234656",
+                    "devicetype": 10,
+                    "command": "opendoor"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles/dashboard/getAllFmsAcc": {
+      "get": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "get fms accounts",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles/dashboard/fmsVhs/getVehicle/11111": {
+      "get": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "get singel fms vehicle",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/vehicles/requestStation": {
+      "get": {
+        "tags": [
+          "vehicles"
+        ],
+        "summary": "request to pick a vehicle from an other department",
+        "parameters": [
+          {
+            "name": "stationId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "5455s55sd55sd5s5ww5zxzd45"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/bookings": {
+      "post": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "create booking",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "VehicleId": "63df88521fdfdf8a9147bb7",
+                  "StartTrip": "2023-06-08T09:02:00.000Z",
+                  "EndTrip": "2023-06-08T09:05:50.000Z",
+                  "StartStation": "63df85vbvbvba2d8a9007bb4",
+                  "EndStation": "63df88521fdfdf8a9147bb7"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "get all bookings per user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/bookings/bookingId": {
+      "delete": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "cancel booking",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "update booking - for example accept the pending bookings",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "gallery": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Status": {
+                    "type": "string",
+                    "example": "running"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/stations": {
+      "post": {
+        "tags": [
+          "stations"
+        ],
+        "summary": "create station",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "StationName": "new station",
+                  "Location": {
+                    "type": "Point",
+                    "cooreinates": [
+                      26.52530492579678,
+                      50.011474143785144
+                    ]
+                  },
+                  "Address": "عنك السعودية",
+                  "Capacity": 5
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "stations"
+        ],
+        "summary": "get all stations to request a vehicle if no availavle vehicles in my department",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/stations/:StationId": {
+      "put": {
+        "tags": [
+          "stations"
+        ],
+        "summary": "update station",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "StationName": "ElDmam",
+                  "Location": {
+                    "type": "Point",
+                    "cooreinates": [
+                      26.37770935932501,
+                      49.98735939261409
+                    ]
+                  },
+                  "Address": "eldamam- elsaouduia",
+                  "Capacity": 5
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/geofence": {
+      "post": {
+        "tags": [
+          "geofence"
+        ],
+        "summary": "add geofence",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "GeoName": "test3333",
+                  "GeoType": 2,
+                  "Coordinates": [
+                    26.1839038527885,
+                    49.256511865051266,
+                    26.070470973200408,
+                    49.042278466613766
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "geofence"
+        ],
+        "summary": "get all geofences",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/geofence/:geoId": {
+      "put": {
+        "tags": [
+          "geofence"
+        ],
+        "summary": "Update Geofence",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "Vehicles": [
+                    "64070602477b80993b27c0d3",
+                    "jhhfvjhfjhgk2445hgc"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "geofence"
+        ],
+        "summary": "get geofence by ID",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "geofence"
+        ],
+        "summary": "Delete Geofence",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/dashboard": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "bookings dashboard",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/dashboard/vehicles": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "vehicles dashboard",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/dashboard/violation/:bookId": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "get violation",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/dashboard/heatMap/": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "get heatMap",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-03-12"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-03-19"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/dashboard/violations": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "get violations",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vhId",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "11111"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-03-19T00:00:00"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-03-21T00:00:00"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "100"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/landmarks": {
+      "get": {
+        "tags": [
+          "landMarks"
+        ],
+        "summary": "get all landmarks",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "landMarks"
+        ],
+        "summary": "add landmark",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "Name": "My landMark",
+                  "Latitude": "25.50464",
+                  "Longitude": "37.004933333333337",
+                  "Image": "home.png"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/landmarks/:landId": {
+      "put": {
+        "tags": [
+          "landMarks"
+        ],
+        "summary": "update landmark",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "Name": "My landMark",
+                  "Latitude": "25.50464",
+                  "Longitude": "37.004933333333337",
+                  "Image": "car.png"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "landMarks"
+        ],
+        "summary": "delete landmark",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/reports/workingHours": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "hours AndMilage Daily Reports Copy",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-20T23:59:59"
+          },
+          {
+            "name": "vehIDs",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "11111,22222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/reports/workingHoursPeriod": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "hours And Milage Period Reports Copy",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "strDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-11T00:00:00"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-15T23:59:59"
+          },
+          {
+            "name": "vehIDs",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "11111,22222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/reports/runningTime": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "get runinng Time Copy",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "strDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2022-05-11T00:00:00"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2022-05-29T20:59:59"
+          },
+          {
+            "name": "vehIDs",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "11111,22222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/reports/tripReport": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "trip report Copy",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "strDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-03-06T08:00:00.00"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-03-07T08:00:00.00"
+          },
+          {
+            "name": "vehIDs",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "11111"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "50"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "pagesCount",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/reports/fuelSummary": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "fuel summary Copy",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "strDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-03-01T10:00:00"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-03-02T10:00:00"
+          },
+          {
+            "name": "vehIDs",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "11111,22222"
+          },
+          {
+            "name": "fuelPrice",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "example": ".8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/reports/driverLogging": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "driver logging Copy",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "strDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-29T00:00:00"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-30T23:59:00"
+          },
+          {
+            "name": "vehIDs",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "11111,22222"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "100"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "pagesCount",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/reports/drivingStat": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "driving statistics Copy",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "strDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-01T00:00:00"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-05T23:59:00"
+          },
+          {
+            "name": "vehIDs",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "11111,22222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/reports/damageReport": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "vehicle damage report",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "strDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-01T00:00:00"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-05T23:59:00"
+          },
+          {
+            "name": "vehIDs",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "11111,22222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/checlists": {
+      "get": {
+        "tags": [
+          "checklists"
+        ],
+        "summary": "vehicle checklists",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "strDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-01T00:00:00"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2023-05-05T23:59:00"
+          },
+          {
+            "name": "vehIDs",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "11111"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "checklists"
+        ],
+        "summary": "create checklists",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "vehicleId": "01214cx54dsd2s15ef",
+                  "bookingId": "01214cx54dsd2s15ef",
+                  "Fuel Level": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  },
+                  "Interior Damage": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  },
+                  "Exterior Damage": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  },
+                  "Oil and water levels": {
+                    "state": "issue",
+                    "images": [
+                      "1.png",
+                      "2.png"
+                    ],
+                    "comments": [
+                      "comment1",
+                      "comment2"
+                    ]
+                  },
+                  "Tyre Tread": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  },
+                  "Tyre pressure": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  },
+                  "Warning lights": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "checklists"
+        ],
+        "summary": "update checklist",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "vehicleId": "01214cx54dsd2s15ef",
+                  "bookingId": "01214cx54dsd2s15ef",
+                  "Fuel Level": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  },
+                  "Interior Damage": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  },
+                  "Exterior Damage": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  },
+                  "Oil and water levels": {
+                    "state": "issue",
+                    "images": [
+                      "1.png",
+                      "2.png"
+                    ],
+                    "comments": [
+                      "comment1",
+                      "comment2"
+                    ]
+                  },
+                  "Tyre Tread": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  },
+                  "Tyre pressure": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  },
+                  "Warning lights": {
+                    "state": "OK",
+                    "images": [],
+                    "comments": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "checklistId",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "01214cx54dsd2s15ef"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
