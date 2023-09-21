@@ -1,15 +1,15 @@
 
 'use client'
-import SwaggerUI from 'swagger-ui-react';
-import 'swagger-ui-react/swagger-ui.css';
-export default class page extends Component {
-  render() {
-    return (
-      <main>
-        <SwaggerUI url="/api/swagger" />
+import dynamic from 'next/dynamic';
 
-      </main>
-    )
-  }
+const SwaggerUI = dynamic(() => import("swagger-ui-react"), { ssr: false })
+import 'swagger-ui-react/swagger-ui.css';
+
+
+const page = () => {
+  return (
+    <SwaggerUI url="/api/swagger" />
+  )
 }
 
+export default page
