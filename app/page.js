@@ -21,12 +21,12 @@ const page = () => {
   }, [isAuth])
 
   return (
-    <>
+    <section >
 
-      {!isAuth ? <> <Login setIsAuth={setIsAuth} isAuth={isAuth} /> </> : <>   <NavBar isAuth={isAuth} setIsAuth={setIsAuth} /> <SwaggerUI url="/api/swagger" /> </>}
+      {!isAuth ? <Login setIsAuth={setIsAuth} isAuth={isAuth} /> : <>   <NavBar isAuth={isAuth} setIsAuth={setIsAuth} /> <SwaggerUI url="/api/swagger" /> </>}
       <ToastContainer position="top-center"
         autoClose={3000} />
-    </>
+    </section>
   )
 }
 
